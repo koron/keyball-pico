@@ -50,12 +50,10 @@ void reg_write(uint8_t addr, uint8_t data) {
 uint8_t pid = 0, rev = 0;
 
 void pmw3360_init() {
-    spi_init(PICO_DEFAULT_SPI, 70000000);
-
 #if 1
+    gpio_set_function(PICO_DEFAULT_SPI_RX_PIN, GPIO_FUNC_SPI);
     gpio_set_function(PICO_DEFAULT_SPI_SCK_PIN, GPIO_FUNC_SPI);
     gpio_set_function(PICO_DEFAULT_SPI_TX_PIN, GPIO_FUNC_SPI);
-    gpio_set_function(PICO_DEFAULT_SPI_RX_PIN, GPIO_FUNC_SPI);
     bi_decl(bi_3pins_with_func(
                 PICO_DEFAULT_SPI_RX_PIN,
                 PICO_DEFAULT_SPI_TX_PIN,
@@ -68,6 +66,7 @@ void pmw3360_init() {
     bi_decl(bi_1pin_with_name(PICO_DEFAULT_SPI_CSN_PIN, "SPI CS"));
 #endif
 
+    spi_init(PICO_DEFAULT_SPI, 70000000);
 #if 0
     spi_set_format(PICO_DEFAULT_SPI, 8, SPI_CPOL_1, SPI_CPHA_0, SPI_MSB_FIRST);
 #endif
