@@ -1,0 +1,24 @@
+#pragma once
+
+//////////////////////////////////////////////////////////////////////////////
+// Global configurations
+
+#define KEY_NUM     29
+
+//////////////////////////////////////////////////////////////////////////////
+// for matrix.c
+
+//#define MATRIX_SCAN_PERFORMANCE_COUNT
+
+#define MATRIX_SCAN_INTERVAL 499
+
+//#define MATRIX_ROW_SELECT_DELAY 0
+
+//#define MATRIX_DEBOUNCE_USEC      (10*1000)
+
+//////////////////////////////////////////////////////////////////////////////
+// for ledarray.c
+
+#define LEDARRAY_NUM    34
+#define LEDARRAY_PIN    0
+#define LEDARRAY_PIO    pio0

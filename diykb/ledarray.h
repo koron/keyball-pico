@@ -1,5 +1,10 @@
 #pragma once
 
+// FIXME: move to config
+#define LEDARRAY_NUM    34
+#define LEDARRAY_PIN    0
+#define LEDARRAY_PIO    pio0
+
 extern uint32_t ledarray_state[LEDARRAY_NUM];
 extern bool ledarray_dirty;
 

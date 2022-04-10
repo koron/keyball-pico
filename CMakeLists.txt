@@ -12,3 +12,4 @@ set(CMAKE_CXX_STANDARD 17)
 add_subdirectory(diykb)
 
 add_subdirectory(helloworld)
+add_subdirectory(keyball61)

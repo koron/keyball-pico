@@ -6,7 +6,10 @@
 #include "hardware/dma.h"
 #include "hardware/irq.h"
 
-#include "config.h"
+
+//#include "config.h"
+#include "ledarray.h"
+
 #include "ws2812.pio.h"
 
 #ifndef LEDARRAY_NUM
