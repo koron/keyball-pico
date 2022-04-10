@@ -4,7 +4,6 @@ pico_enable_stdio_usb(keyball61 1)
 pico_enable_stdio_uart(keyball61 0)
 
 target_link_libraries(keyball61
-	pico_stdlib
 	diykb
 	pico_bootsel_via_double_reset)
 
