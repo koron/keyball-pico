@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 
+set(PICO_BOARD sparkfun_promicro)
+
 include(pico_sdk_import.cmake)
 
 project(keyball-pico C CXX ASM)

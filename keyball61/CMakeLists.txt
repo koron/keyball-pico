@@ -7,6 +7,7 @@ target_include_directories(keyball61 PUBLIC .)
 
 target_link_libraries(keyball61
 	diykb
+	hardware_spi
 	pico_bootsel_via_double_reset)
 
 pico_add_extra_outputs(keyball61)
