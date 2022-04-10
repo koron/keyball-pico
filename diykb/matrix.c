@@ -4,15 +4,11 @@
 #include "pico/stdlib.h"
 #include "hardware/gpio.h"
 
-//#include "config.h"
+#include "config.h"
 #include "layout.h"
 
-#ifndef MATRIX_SCAN_INTERVAL
-# define MATRIX_SCAN_INTERVAL 499
-#endif
-
 #ifndef MATRIX_ROW_SELECT_DELAY
-# define MATRIX_ROW_SELECT_DELAY 5
+# define MATRIX_ROW_SELECT_DELAY 1
 #endif
 
 // MATRIX_DEBOUNCE_USEC is inhibition interval (us) for changing status of each
@@ -25,10 +21,6 @@ typedef struct {
     bool     on:1;
     uint64_t last:63;
 } matrix_keystate_t;
-
-#ifndef KEY_NUM
-# define KEY_NUM 29
-#endif
 
 matrix_keystate_t matrix_keystates[KEY_NUM] = {0};
 

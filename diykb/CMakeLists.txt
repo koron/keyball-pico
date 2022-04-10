@@ -4,10 +4,10 @@ target_include_directories(diykb INTERFACE .)
 
 target_sources(diykb INTERFACE
 	#action.c
-	backlight.c
 	#kbd.c
 	#keycode.c
 	#layer.c
+	backlight.c
 	ledarray.c
 	matrix.c
 	)

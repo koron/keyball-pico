@@ -1,6 +1,15 @@
 #pragma once
 
 //////////////////////////////////////////////////////////////////////////////
+// for usb_descriptors.c
+
+#define VENDOR_ID       0x5957
+#define PRODUCT_ID      0x0101
+#define DEVICE_VER      0x0001
+#define MANUFACTURER    Yowkees
+#define PRODUCT         Keyball61/RP2
+
+//////////////////////////////////////////////////////////////////////////////
 // Global configurations
 
 #define KEY_NUM     29
@@ -12,7 +21,7 @@
 
 #define MATRIX_SCAN_INTERVAL 499
 
-//#define MATRIX_ROW_SELECT_DELAY 0
+#define MATRIX_ROW_SELECT_DELAY 5
 
 //#define MATRIX_DEBOUNCE_USEC      (10*1000)
 
@@ -22,3 +31,6 @@
 #define LEDARRAY_NUM    34
 #define LEDARRAY_PIN    0
 #define LEDARRAY_PIO    pio0
+
+//////////////////////////////////////////////////////////////////////////////
+// development flags

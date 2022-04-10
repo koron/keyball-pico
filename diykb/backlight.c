@@ -1,6 +1,6 @@
 #include "pico/stdlib.h"
 
-//#include "config.h"
+#include "config.h"
 #include "ledarray.h"
 
 static void update_rainbow(uint t) {
