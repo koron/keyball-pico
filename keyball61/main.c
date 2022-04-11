@@ -67,6 +67,7 @@ void pmw3360_init() {
     gpio_put(SPI_CSN, true);
     bi_decl(bi_1pin_with_name(SPI_CSN, "SPI CS"));
 
+    // SPI initialize.
     spi_init(SPI_PORT, 2*1000*1000);
     spi_set_format(SPI_PORT, 8, SPI_CPOL_1, SPI_CPHA_1, SPI_MSB_FIRST);
 
@@ -81,6 +82,7 @@ void pmw3360_init() {
     reg_read(0x06);
     // configuration
     reg_write(0x10, 0x00);
+    // read and verify identifiers
     pid = reg_read(0x00);
     rev = reg_read(0x01);
 }
