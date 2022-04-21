@@ -37,10 +37,10 @@ uint8_t reg_read(uint8_t addr) {
     cs_select();
     addr &= 0x7f;
     spi_write_blocking(SPI_PORT, &addr, 1);
-    sleep_us(160);
+    busy_wait_us_32(160);
     uint8_t data = 0;
     spi_read_blocking(SPI_PORT, 0, &data, 1);
-    sleep_us(20);
+    busy_wait_us_32(20);
     cs_deselect();
     return data;
 }
@@ -50,7 +50,7 @@ void reg_write(uint8_t addr, uint8_t data) {
     cs_select();
     spi_write_blocking(SPI_PORT, buf, 2);
     cs_deselect();
-    sleep_us(180);
+    busy_wait_us_32(180);
 }
 
 uint8_t pid = 0, rev = 0;
@@ -73,7 +73,7 @@ void pmw3360_init() {
 
     // reboot
     reg_write(0x3a, 0x5a);
-    sleep_us(50);
+    busy_wait_us_32(50);
     // read five registers of motion and discard those values
     reg_read(0x02);
     reg_read(0x03);
