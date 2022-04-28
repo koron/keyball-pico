@@ -101,6 +101,7 @@ static void matrix_gpio_init(uint gpio) {
     gpio_set_dir(gpio, GPIO_IN);
     gpio_pull_up(gpio);
     gpio_put(gpio, false);
+    //gpio_set_slew_rate(gpio, GPIO_SLEW_RATE_SLOW);
 }
 
 void matrix_init() {

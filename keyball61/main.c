@@ -8,6 +8,7 @@
 #include "matrix.h"
 #include "ledarray.h"
 #include "backlight.h"
+#include "layout.h"
 
 #if 0
 void matrix_suppressed(uint64_t when, uint knum, bool on, uint64_t last, uint64_t elapsed) {
@@ -87,6 +88,39 @@ void pmw3360_init() {
     rev = reg_read(0x01);
 }
 
+static void toggle_backlight() {
+    if (backlight_is_enable()) {
+        backlight_disable();
+    } else {
+        backlight_enable();
+    }
+}
+
+int32_t matrix_pin_unselect_delay = 79;
+static bool tick_log_enable = true;
+
+void matrix_changed(uint64_t when, uint knum, bool on) {
+    printf("matrix_changed: knum=%d %s when=%llu\n", knum, on ? "ON" : "OFF", when);
+    if (on) {
+        switch (knum) {
+            case 0:
+                toggle_backlight();
+                break;
+            case 6:
+                if (matrix_pin_unselect_delay == 79) {
+                    matrix_pin_unselect_delay = 49;
+                } else {
+                    matrix_pin_unselect_delay = 79;
+                }
+                printf("changed: matrix_pin_unselect_delay=%d\n", matrix_pin_unselect_delay);
+                break;
+            case 25:
+                tick_log_enable = !tick_log_enable;
+                break;
+        }
+    }
+}
+
 int main() {
     stdio_init_all();
     pmw3360_init();
@@ -100,9 +134,9 @@ int main() {
         matrix_task(now);
         backlight_task(now);
         ledarray_task(now);
-        if ((now - last) > 1000000) {
+        if (tick_log_enable && (now - last) > 1000000) {
             last = now;
-            printf("Hello Keyball61: pid=%02x rev=%02x rx=%d sck=%d tx=%d\n", pid, rev, SPI_RX, SPI_SCK, SPI_TX);
+            printf("tick: pid=%02x rev=%02x rx=%d sck=%d tx=%d\n", pid, rev, SPI_RX, SPI_SCK, SPI_TX);
         }
     }
 }

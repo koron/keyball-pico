@@ -181,3 +181,7 @@ void backlight_disable(void) {
 void backlight_enable(void) {
     enable = true;
 }
+
+bool backlight_is_enable(void) {
+    return enable;
+}

@@ -22,7 +22,9 @@
 #define MATRIX_SCAN_INTERVAL 499
 
 #define MATRIX_PIN_SELECT_DELAY     1
-#define MATRIX_PIN_UNSELECT_DELAY   79
+#define MATRIX_PIN_UNSELECT_DELAY   matrix_pin_unselect_delay
+
+extern int32_t matrix_pin_unselect_delay;
 
 //#define MATRIX_DEBOUNCE_USEC      (10*1000)
 
