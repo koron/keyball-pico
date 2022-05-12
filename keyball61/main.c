@@ -99,6 +99,9 @@ static void toggle_backlight() {
 int32_t matrix_pin_unselect_delay = 79;
 static bool tick_log_enable = true;
 
+static const int32_t delays[] = { 79, 49, 9 };
+static int delay_idx = 0;
+
 void matrix_changed(uint64_t when, uint knum, bool on) {
     printf("matrix_changed: knum=%d %s when=%llu\n", knum, on ? "ON" : "OFF", when);
     if (on) {
@@ -107,11 +110,10 @@ void matrix_changed(uint64_t when, uint knum, bool on) {
                 toggle_backlight();
                 break;
             case 6:
-                if (matrix_pin_unselect_delay == 79) {
-                    matrix_pin_unselect_delay = 49;
-                } else {
-                    matrix_pin_unselect_delay = 79;
+                if (++delay_idx >= count_of(delays)) {
+                    delay_idx = 0;
                 }
+                matrix_pin_unselect_delay = delays[delay_idx];
                 printf("changed: matrix_pin_unselect_delay=%d\n", matrix_pin_unselect_delay);
                 break;
             case 25:
