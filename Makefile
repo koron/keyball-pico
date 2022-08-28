@@ -16,4 +16,8 @@ distclean:
 
 .PHONY: tags
 tags:
-	ctags --exclude=build/ -R .
+	ctags --exclude=build/* --exclude=tmp/* -R .
+
+.PHONY: keyball61
+keyball61: build/Makefile
+	make -j8 -C build keyball61

@@ -5,16 +5,10 @@
 #include "hardware/spi.h"
 
 #include "config.h"
-#include "matrix.h"
-#include "ledarray.h"
-#include "backlight.h"
-#include "layout.h"
-
-#if 0
-void matrix_suppressed(uint64_t when, uint knum, bool on, uint64_t last, uint64_t elapsed) {
-    // disable "suppressed" logs
-}
-#endif
+#include "diykb/light.h"
+#include "diykb/matrix.h"
+#include "diykb/kbd.h"
+#include "diykb/ledarray.h"
 
 #define SPI_PORT    spi_default
 #define SPI_RX      PICO_DEFAULT_SPI_RX_PIN
@@ -89,10 +83,10 @@ void pmw3360_init() {
 }
 
 static void toggle_backlight() {
-    if (backlight_is_enable()) {
-        backlight_disable();
+    if (light_is_enable()) {
+        light_disable();
     } else {
-        backlight_enable();
+        light_enable();
     }
 }
 
@@ -102,39 +96,19 @@ static bool tick_log_enable = true;
 static const int32_t delays[] = { 79, 49, 9 };
 static int delay_idx = 0;
 
-void matrix_changed(uint64_t when, uint knum, bool on) {
-    printf("matrix_changed: knum=%d %s when=%llu\n", knum, on ? "ON" : "OFF", when);
-    if (on) {
-        switch (knum) {
-            case 0:
-                toggle_backlight();
-                break;
-            case 6:
-                if (++delay_idx >= count_of(delays)) {
-                    delay_idx = 0;
-                }
-                matrix_pin_unselect_delay = delays[delay_idx];
-                printf("changed: matrix_pin_unselect_delay=%d\n", matrix_pin_unselect_delay);
-                break;
-            case 25:
-                tick_log_enable = !tick_log_enable;
-                break;
-        }
-    }
-}
-
 int main() {
     stdio_init_all();
+
+    ledarray_init();
+    light_init();
     pmw3360_init();
     matrix_init();
-    ledarray_init();
-    backlight_init();
 
     uint64_t last = 0;
     while(true) {
         uint64_t now = time_us_64();
         matrix_task(now);
-        backlight_task(now);
+        light_task(now);
         ledarray_task(now);
         if (tick_log_enable && (now - last) > 1000000) {
             last = now;

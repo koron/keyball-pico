@@ -1,4 +1,4 @@
-#include "layout.h"
+#include "diykb/layout.h"
 
 enum {
     R0 = 4,
