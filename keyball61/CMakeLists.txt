@@ -1,12 +1,15 @@
 add_executable(keyball61 layout.c main.c keymap.c)
 
+## Link Time Optimization is not supported yet.
+#set_property(TARGET yuiop60pi PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
+
 pico_set_program_name(keyball61 "keyball61")
 pico_set_program_version(keyball61 "0.0.1-alpha.0")
 pico_set_program_url(keyball61 "https://github.com/koron/keyball-pico")
 pico_set_program_description(keyball61 "Keyball61 for RP2040")
 
-pico_enable_stdio_usb(keyball61 1)
 pico_enable_stdio_uart(keyball61 0)
+pico_enable_stdio_usb(keyball61 1)
 
 target_include_directories(keyball61 PUBLIC ${CMAKE_CURRENT_LIST_DIR})
 

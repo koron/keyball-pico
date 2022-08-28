@@ -5,6 +5,7 @@ include(pico_sdk_import.cmake)
 project(keyball-pico C CXX ASM)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
+
 if (NOT PICO_BOARD)
     set(PICO_BOARD sparkfun_promicro)
 endif()
